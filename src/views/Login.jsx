@@ -7,7 +7,6 @@ import {
   Typography
 } from '@material-tailwind/react'
 import { useForm } from '../hooks/useForm'
-import constante from '../constante'
 import { useNavigate } from 'react-router-dom'
 
 export const Login = () => {
@@ -23,8 +22,10 @@ export const Login = () => {
     e.preventDefault()
     console.log(user, password)
 
-    if (user === constante.USER && password === constante.PASS) {
-      navigate(`/prestamos/${constante.HASH_PERMITIDO}`)
+    if (user.toUpperCase() === import.meta.env.VITE_USER.toUpperCase() && password === import.meta.env.VITE_PASS) {
+      navigate(`/prestamos/${import.meta.env.VITE_HASH_PERMITIDO}`)
+    } else {
+      alert('password invalida')
     }
   }
 
@@ -32,6 +33,7 @@ export const Login = () => {
     <section className='flex justify-center items-center h-screen'>
       <Card className='w-96 shadow-2xl'>
         <CardBody className='flex flex-col gap-4'>
+          {import.meta.env.VITE_TEST}
           <form className='mt-12 flex flex-col gap-4' onSubmit={submit}>
             <Typography variant='h3' color='blue-gray' className='p-3'>
               Control Préstamo Arias

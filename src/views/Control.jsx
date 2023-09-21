@@ -21,7 +21,6 @@ import {
   Tooltip
 } from '@material-tailwind/react'
 import { useNavigate, useParams } from 'react-router-dom'
-import constante from '../constante'
 
 const TABS = [
   {
@@ -93,7 +92,7 @@ export const Control = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (hash !== constante.HASH_PERMITIDO) {
+    if (hash !== import.meta.env.VITE_HASH_PERMITIDO) {
       return navigate('/')
     }
   }, [hash])
