@@ -20,11 +20,10 @@ export const Login = () => {
 
   const submit = (e) => {
     e.preventDefault()
-    console.log(user, password)
-
     if (user.toUpperCase() === import.meta.env.VITE_USER.toUpperCase() && password === import.meta.env.VITE_PASS) {
       navigate(`/prestamos/${import.meta.env.VITE_HASH_PERMITIDO}`)
     } else {
+      // eslint-disable-next-line no-undef
       alert('password invalida')
     }
   }

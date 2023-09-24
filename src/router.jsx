@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 import App from './App'
-import { Control } from './views/Control'
+import { Control } from './views/control/Control'
 
 export default createBrowserRouter([
   {
