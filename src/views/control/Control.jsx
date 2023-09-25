@@ -18,6 +18,7 @@ import {
 import { useNavigate, useParams } from 'react-router-dom'
 import ControlTable from './ControlTable'
 import { usePrestamo } from '../../store'
+import ControlModal from './ControlModalAddPrestamo'
 
 const TABS = [
   {
@@ -28,16 +29,13 @@ const TABS = [
     label: 'graficos',
     value: 'monitored'
   }
-  // {
-  //   label: 'Unmonitored',
-  //   value: 'unmonitored'
-  // }
 ]
 
 export const Control = () => {
   const { hash } = useParams()
   const navigate = useNavigate()
   const fetchPrestamo = usePrestamo(state => state.fetchPrestamo)
+  const [openAddPrestamo, setOpenAddPrestamo] = React.useState(false)
 
   useEffect(() => {
     if (hash !== import.meta.env.VITE_HASH_PERMITIDO) {
@@ -48,6 +46,8 @@ export const Control = () => {
   useEffect(() => {
     fetchPrestamo()
   }, [])
+
+  const handleOpenPrestamo = () => setOpenAddPrestamo((cur) => !cur)
 
   return (
     <div className='h-full w-full p-5'>
@@ -66,7 +66,7 @@ export const Control = () => {
             <Button variant='outlined' size='sm'>
               view all
             </Button>
-            <Button className='flex items-center gap-3' size='sm'>
+            <Button className='flex items-center gap-3' size='sm' onClick={handleOpenPrestamo}>
               <UserPlusIcon strokeWidth={2} className='h-4 w-4' />
               Añadir prestamo
             </Button>
@@ -106,6 +106,7 @@ export const Control = () => {
           </Button>
         </div>
       </CardFooter>
+      <ControlModal open={openAddPrestamo} handleOpen={handleOpenPrestamo} />
     </div>
   )
 }
