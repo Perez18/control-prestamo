@@ -1,3 +1,4 @@
+
 # Sistema de Control de Préstamo
 
 Este proyecto es un sistema simple de control de préstamos diseñado para ayudar a gestionar préstamos de libros, películas u otros elementos. Es una aplicación de consola que permite a los usuarios registrar préstamos, devoluciones y consultar el estado de los préstamos.
@@ -11,3 +12,5 @@ Este proyecto es un sistema simple de control de préstamos diseñado para ayuda
 ## Requisitos
 - React Js
 - Mysql
+
+<img src="./src/assets/capture.png" alt="Texto alternativo">
