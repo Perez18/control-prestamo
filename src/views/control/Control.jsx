@@ -18,7 +18,7 @@ import {
 import { useNavigate, useParams } from 'react-router-dom'
 import ControlTable from './ControlTable'
 import { usePrestamo } from '../../store'
-import ControlModal from './ControlModalAddPrestamo'
+import ControlModalAddPrestamo from './ControlModalAddPrestamo'
 
 const TABS = [
   {
@@ -106,7 +106,10 @@ export const Control = () => {
           </Button>
         </div>
       </CardFooter>
-      <ControlModal open={openAddPrestamo} handleOpen={handleOpenPrestamo} />
+      <ControlModalAddPrestamo
+        open={openAddPrestamo}
+        handleOpen={handleOpenPrestamo}
+      />
     </div>
   )
 }

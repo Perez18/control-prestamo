@@ -1,5 +1,5 @@
 export const redondearNumero = (numero) => {
-  const numeroRedondeado = numero.toFixed(2)
+  const numeroRedondeado = numero?.toFixed(2) || 0
   return numeroRedondeado
 }
 
