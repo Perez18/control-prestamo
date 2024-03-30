@@ -7,8 +7,8 @@ import {
   CardFooter,
   Input
 } from '@material-tailwind/react'
-import { useForm } from '../../hooks/useForm'
-import { usePrestamo } from '../../store'
+import { useForm } from '../../../hooks/useForm'
+import { usePrestamo } from '../../../store'
 
 const ControlModalAddPrestamo = ({
   handleOpen,
@@ -26,7 +26,7 @@ const ControlModalAddPrestamo = ({
 
   const submitAddPrestamo = (e) => {
     e.preventDefault()
-    console.log({ nombre, prestamo, interes })
+    // console.log({ nombre, prestamo, interes })
     postPrestamo({ nombre, prestamo, interes })
   }
 

@@ -18,7 +18,7 @@ import {
 import { useNavigate, useParams } from 'react-router-dom'
 import ControlTable from './ControlTable'
 import { usePrestamo } from '../../store'
-import ControlModalAddPrestamo from './ControlModalAddPrestamo'
+import ControlModalAddPrestamo from './modal/ControlModalAddPrestamo'
 
 const TABS = [
   {

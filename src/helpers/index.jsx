@@ -6,8 +6,7 @@ export const redondearNumero = (numero) => {
 export const getFecha = (timestamp) => {
   const date = new Date(timestamp)
 
-  const options = { timeZone: 'Asia/Kolkata' }
-  const formattedDate = date.toLocaleString('en-US', options)
+  const formattedDate = date.toLocaleString('en-US')
 
   return formattedDate
 }

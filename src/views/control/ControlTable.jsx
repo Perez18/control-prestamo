@@ -1,9 +1,13 @@
 /* eslint-disable camelcase */
 import React from 'react'
 import {
-  ChevronUpDownIcon
+  ChevronUpDownIcon,
+  TrashIcon,
+  // CurrencyDollarIcon,
+  TableCellsIcon,
+  // PlusCircleIcon,
+  PlusIcon
 } from '@heroicons/react/24/outline'
-import { FolderIcon } from '@heroicons/react/24/solid'
 import {
   Typography,
   IconButton,
@@ -14,9 +18,10 @@ import {
 import { usePrestamo } from '../../store'
 import dayjs from 'dayjs'
 import { getFecha, redondearNumero } from '../../helpers'
-import ControlModalDetalle from './ControlModaDetalle'
+import ControlModalDetalle from './modal/ControlModaDetalle'
+import ControlModalPago from './modal/ControlModalAddPago'
 
-const headers = ['Nombre', 'Prestado', 'Capital', 'interes', 'deuda pendiente', 'pagada', 'ganacia', 'estado', 'fecha hora', 'ver']
+const headers = ['Nombre', 'Prestado', 'interes', 'deuda pendiente', 'pagada', 'ganacia', 'estado', 'fecha hora', 'Opciones']
 const rows = [
   {
     img: 'https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg',
@@ -69,12 +74,39 @@ const ControlTable = () => {
   const loading = usePrestamo(state => state.loading)
   const prestamo = usePrestamo(state => state.prestamo)
   const getFindPrestamo = usePrestamo(state => state.getFindPrestamo)
-  const [openDetalle, setOpenDetalle] = React.useState(false)
-  const [findPrestamo, setFindPrestamo] = React.useState(null)
+  const fetchPagos = usePrestamo(state => state.fetchPagos)
+  const updateDeletePrestado = usePrestamo(state => state.updateDeletePrestado)
 
-  const handleOpenDetalle = (id) => {
+  // state local
+  const [findPrestamo, setFindPrestamo] = React.useState(null)
+  const [pagos, setPagos] = React.useState(null)
+
+  // modal
+  const [openDetalle, setOpenDetalle] = React.useState(false)
+  const [openPago, setOpenPago] = React.useState(false)
+
+  // open modal detalle de pagos
+  const handleOpenDetalle = async (id) => {
+    // find prestamo
     setFindPrestamo(getFindPrestamo(id))
+
+    // pagos
+    const data = await fetchPagos(id)
+    setPagos(data)
+
     setOpenDetalle((cur) => !cur)
+  }
+
+  // open modal add pagos
+  const handleOpenAddPago = (id) => {
+    setFindPrestamo(getFindPrestamo(id))
+    setOpenPago((cur) => !cur)
+  }
+
+  const handleDeletePrestamo = (id) => {
+    const nombre = getFindPrestamo(id).nombre
+    const resp = window.confirm(`Desea eliminar el prestamo de ${nombre}`)
+    if (resp) updateDeletePrestado(id)
   }
 
   function CustomSpinner () {
@@ -144,7 +176,7 @@ const ControlTable = () => {
                               </Typography>
                             </div>
                           </td>
-                          <td className={classes}>
+                          {/* <td className={classes}>
                             <div className='flex flex-col'>
                               <Typography
                                 variant='small'
@@ -154,7 +186,7 @@ const ControlTable = () => {
                                 B/ {redondearNumero(deuda_capital)}
                               </Typography>
                             </div>
-                          </td>
+                          </td> */}
                           <td className={classes}>
                             <div className='flex flex-col'>
                               <Typography
@@ -221,7 +253,17 @@ const ControlTable = () => {
                           <td className={classes}>
                             <Tooltip content='ver detalle'>
                               <IconButton variant='text' onClick={(rest) => handleOpenDetalle(id, rest)}>
-                                <FolderIcon className='h-4 w-4' />
+                                <TableCellsIcon className='h-4 w-4' />
+                              </IconButton>
+                            </Tooltip>
+                            <Tooltip content='añadir pago'>
+                              <IconButton variant='text' onClick={(rest) => handleOpenAddPago(id, rest)}>
+                                <PlusIcon className='h-4 w-4' />
+                              </IconButton>
+                            </Tooltip>
+                            <Tooltip content='eliminar'>
+                              <IconButton variant='text' onClick={(rest) => handleDeletePrestamo(id, rest)}>
+                                <TrashIcon className='h-4 w-4' />
                               </IconButton>
                             </Tooltip>
                           </td>
@@ -243,8 +285,14 @@ const ControlTable = () => {
       </table>
       <ControlModalDetalle
         prestamo={findPrestamo}
+        pagos={pagos}
         handleOpen={handleOpenDetalle}
         open={openDetalle}
+      />
+      <ControlModalPago
+        prestamo={findPrestamo}
+        handleOpen={handleOpenAddPago}
+        open={openPago}
       />
     </>
   )
