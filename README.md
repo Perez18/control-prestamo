@@ -11,6 +11,6 @@ Este proyecto es un sistema simple de control de préstamos diseñado para ayuda
 
 ## Requisitos
 - React Js
-- Mysql
+- Firebase
 
 <img src="./src/assets/capture.png" alt="Texto alternativo">
