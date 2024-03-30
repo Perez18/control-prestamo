@@ -31,7 +31,7 @@ const ControlModalDetalle = ({
         <Card>
           <CardBody>
             <DialogHeader>Prestamo de {prestamo?.nombre}</DialogHeader>
-            <DialogBody divider>
+            <DialogBody className='h-full w-full overflow-scroll' divider>
               <div className='flex justify-center gap-16'>
                 <p className='text-lg font-bold'>Deuda pendiente : {parseFloat(prestamo?.deuda_pendiente || 0).toFixed(2)}</p>
                 <p className='text-lg font-bold'>Ganancias : {parseFloat(prestamo?.ganancia || 0).toFixed(2)}</p>
