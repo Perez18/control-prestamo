@@ -10,6 +10,7 @@ import {
 import { useForm } from '../../../hooks/useForm'
 import { usePrestamo } from '../../../store'
 
+const interesDefault = import.meta.env.VITE_INTERES
 const ControlModalAddPrestamo = ({
   handleOpen,
   open
@@ -19,7 +20,7 @@ const ControlModalAddPrestamo = ({
   const { values, handleInputChange } = useForm({
     nombre: ' ',
     prestamo: 0,
-    interes: 0
+    interes: parseFloat(interesDefault)
   })
 
   const { nombre, prestamo, interes } = values
@@ -28,6 +29,8 @@ const ControlModalAddPrestamo = ({
     e.preventDefault()
     // console.log({ nombre, prestamo, interes })
     postPrestamo({ nombre, prestamo, interes })
+
+    handleOpen()
   }
 
   return (
@@ -50,7 +53,7 @@ const ControlModalAddPrestamo = ({
               <Input type='number' name='interes' value={interes} onChange={handleInputChange} label='Interes' size='lg' />
             </CardBody>
             <CardFooter className='pt-0'>
-              <Button type='submit' variant='gradient' onClick={handleOpen} fullWidth>
+              <Button type='submit' variant='gradient' fullWidth>
                 Registrar prestamo
               </Button>
             </CardFooter>

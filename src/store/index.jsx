@@ -40,7 +40,7 @@ export const usePrestamo = create((set, get) => ({
   },
   postPrestamo: async (data) => {
     const { nombre, prestamo, interes } = data
-    const res = await addDoc(collection(db, 'prestamo'), {
+    await addDoc(collection(db, 'prestamo'), {
       nombre,
       deuda_inicial: parseFloat(prestamo),
       deuda_interes: 0,
@@ -52,7 +52,7 @@ export const usePrestamo = create((set, get) => ({
       fecha_creacion: new Date()
     })
 
-    console.log(res)
+    // console.log(res)
 
     get().fetchPrestamo()
   },

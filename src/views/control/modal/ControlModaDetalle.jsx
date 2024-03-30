@@ -55,7 +55,7 @@ const ControlModalDetalle = ({
                     </th>
                     <th
                       className='cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50'
-                    >Fecha
+                    >Fecha de pago
                     </th>
                   </tr>
 

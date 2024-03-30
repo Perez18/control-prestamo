@@ -20,6 +20,7 @@ const ControlModalPago = ({
   const submitAddPago = (e) => {
     e.preventDefault()
     postPago({ idPrestamo: prestamo.id, montopagar, ...prestamo })
+    handleOpen()
   }
 
   return (
